@@ -36,6 +36,10 @@ export const useForm = ( initialForm = {}, formValidations = {} ) => {
     useEffect(() => {
         createValidators()
     }, [formState])
+
+    useEffect(() => {
+        setFormState(initialForm)
+    }, [initialForm])
     
     return {
         ...formState,

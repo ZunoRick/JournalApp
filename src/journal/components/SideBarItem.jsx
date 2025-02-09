@@ -9,7 +9,7 @@ export const SideBarItem = ({ note }) => {
   const dispatch = useDispatch()
 
   const onClickNote = () => {
-    dispatch( setActiveNote({ ...note, imageUrls: [] }) )
+    dispatch( setActiveNote({ ...note }) )
   }
 
   const newTitle = useMemo(() => {

@@ -2,13 +2,13 @@ import { useEffect, useMemo, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { Button, Grid2, IconButton, TextField, Typography } from "@mui/material";
-import { SaveOutlined, UploadOutlined } from "@mui/icons-material";
+import { DeleteOutline, SaveOutlined, UploadOutlined } from "@mui/icons-material";
 import Swal from "sweetalert2";
 import 'sweetalert2/dist/sweetalert2.css'
 
 import { ImageGallery } from "../components";
 import { useForm } from "../../hooks/useForm";
-import { setActiveNote, startSaveNote, startUploadingFiles } from "../../store/journal";
+import { setActiveNote, startDeletingNote, startSaveNote, startUploadingFiles } from "../../store/journal";
 
 export const NoteView = () => {
   const dispatch = useDispatch()
@@ -30,6 +30,10 @@ export const NoteView = () => {
     const { target } = event
     if(target.files === 0) return
     dispatch( startUploadingFiles( target.files ) )
+  }
+
+  const onDelete = () => {
+    dispatch( startDeletingNote() )
   }
 
   useEffect(() => {
@@ -110,8 +114,19 @@ export const NoteView = () => {
         onChange={onInputChange}
       />
 
+      <Grid2 container sx={{ width: '100%', justifyContent: 'flex-end' }}>
+        <Button
+          onClick={ onDelete }
+          sx={{ mt: 2 }}
+          color="error"
+        >
+          <DeleteOutline/>
+          Borrar
+        </Button>
+      </Grid2>
+
       {/* Galería de imagenes */}
-      <ImageGallery/>
+      { note?.imageUrls?.length && <ImageGallery images={ note.imageUrls }/>}
     </Grid2>
   )
 }

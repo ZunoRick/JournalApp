@@ -28,12 +28,17 @@ export const LoginPage = () => {
   }
 
   const onGoogleSignIn = () => {
+    console.log('onGoogleSignIn');
     dispatch(startGoogleSignIn())
   }
 
   return (
     <AuthLayout title='Login'>
-      <form onSubmit={ onSubmit } className='animate__animated animate__fadeIn animate__faster'>
+      <form
+        aria-label='submit-form'
+        onSubmit={ onSubmit }
+        className='animate__animated animate__fadeIn animate__faster'
+      >
         <Grid2 container sx={{ flexDirection: 'column' }}>
           <Grid2 size={12} sx={{ mt: 2 }}>
             <TextField
@@ -84,6 +89,7 @@ export const LoginPage = () => {
                 variant="contained"
                 fullWidth
                 onClick={onGoogleSignIn}
+                aria-label='google-btn'
                 disabled={isAuthenticating}
               >
                 <Google/>
